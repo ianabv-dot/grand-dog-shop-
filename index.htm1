@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grand Dog — магазин кормов</title>
+</head>
+<body style="background:#f4f7f3;font-family:Arial;text-align:center;padding:40px">
+  <h1 style="color:#205c42">GRAND DOG 🐾</h1>
+  <h2>Каталог кормов для собак и кошек</h2>
+  <p>Скоро здесь появятся все товары, цены и фотографии.</p>
+  <a href="https://t.me/kormgrand_dog">Связаться через Telegram</a>
+</body>
+</html>
