@@ -10,4 +10,16 @@ const search=document.getElementById('search'),category=document.getElementById(
 [...new Set(products.map(p=>p.weight))].sort((a,b)=>a-b).forEach(v=>weight.add(new Option(v+' кг',String(v))));
 function render(){const term=search.value.toLocaleLowerCase('ru').trim();const visible=products.filter(p=>(!term||p.name.toLocaleLowerCase('ru').includes(term))&&(!category.value||p.cat===category.value)&&(!weight.value||String(p.weight)===weight.value));count.textContent='Найдено товаров: '+visible.length;grid.replaceChildren();for(const p of visible){const card=document.createElement('article');card.className='card';const c=document.createElement('div');c.className='category';c.textContent=p.cat;const n=document.createElement('div');n.className='name';n.textContent=p.name;const w=document.createElement('div');w.className='weight';w.textContent='Фасовка: '+p.weight+' кг';const price=document.createElement('div');price.className='price';price.textContent=p.price.toLocaleString('ru-RU')+' ₽';const a=document.createElement('a');a.className='btn';a.href='https://t.me/kormgrand_dog';a.target='_blank';a.rel='noopener noreferrer';a.textContent='Уточнить и заказать';card.append(c,n,w,price,a);grid.append(card)}}
 search.addEventListener('input',render);category.addEventListener('change',render);weight.addEventListener('change',render);render();
+ document.addEventListener('DOMContentLoaded', () => {
+  const gallery = document.createElement('section');
+  gallery.innerHTML = '<h2>Фотографии кормов Grand Dog</h2>';
+  for (let i = 1; i <= 9; i++) {
+    const img = document.createElement('img');
+    img.src = 'grand_dog_' + String(i).padStart(2, '0') + '.png';
+    img.alt = 'Корм Grand Dog';
+    img.style.cssText = 'width:200px;max-width:100%;margin:10px;border-radius:12px';
+    gallery.appendChild(img);
+  }
+  document.body.appendChild(gallery);
+}); 
 </script></body></html>
