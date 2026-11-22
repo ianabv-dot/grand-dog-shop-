@@ -9,7 +9,29 @@ button.btn{border:0;font:inherit;font-weight:bold;cursor:pointer}
 .max-order-dialog::backdrop{background:rgba(0,0,0,.55)}
 .max-order-dialog h2{margin:0 0 12px}
 .max-order-dialog textarea{width:100%;padding:10px;margin:0 0 12px;border:1px solid #b7cabd;border-radius:9px;font:inherit;resize:vertical}
-</style></head>
+</style>
+<script>
+  window.ym = function () {
+    (window.ym.a = window.ym.a || []).push(arguments);
+  };
+  window.ym.l = Date.now();
+
+  const metrikaCounterId = 114505394;
+  const metrikaScript = document.createElement('script');
+  metrikaScript.async = true;
+  metrikaScript.src = 'https://mc.yandex.ru/metrika/tag.js?id=' + metrikaCounterId;
+  document.head.append(metrikaScript);
+
+  window.ym(metrikaCounterId, 'init', { trackLinks: false, webvisor: false });
+
+  function trackOrderLink(link) {
+    link.addEventListener('click', () => {
+      // Record the messenger only, omitting the order text and invite URL.
+      window.ym(metrikaCounterId, 'extLink', new URL(link.href).origin + '/');
+    });
+  }
+</script>
+</head>
 <body><header><div><h1>GRAND DOG 🐾</h1><p>Каталог кормов для собак и кошек</p></div></header><main><section class="hero"><h2>Подберите корм для вашего питомца</h2><p>Выберите фасовку и добавьте товары в корзину. Можно собрать один заказ из нескольких позиций и отправить его продавцу одним сообщением в Telegram или MAX. Цена указана за упаковку.</p></section>
 <div class="controls"><input id="search" type="search" placeholder="Поиск по названию"><select id="category"><option value="">Все категории</option></select><select id="weight"><option value="">Любая фасовка</option></select></div><section id="cart" class="cart" aria-live="polite"></section><p id="count" class="count"></p><section id="products" class="grid"></section></main><footer>Grand Dog · Заказы через Telegram и MAX · <a href="tel:+79385277575">8 (938) 527-75-75</a></footer>
 <dialog id="max-order-dialog" class="max-order-dialog" aria-labelledby="max-order-title">
@@ -147,6 +169,7 @@ async function copyMaxOrder() {
 }
 
 document.getElementById('max-order-copy').addEventListener('click', copyMaxOrder);
+trackOrderLink(maxOrderDialog.querySelector('a.max-order'));
 
 function orderActions(message) {
   const actions = document.createElement('div');
@@ -158,6 +181,7 @@ function orderActions(message) {
   telegram.target = '_blank';
   telegram.rel = 'noopener noreferrer';
   telegram.textContent = 'Заказать в Telegram';
+  trackOrderLink(telegram);
 
   const max = document.createElement('button');
   max.type = 'button';
